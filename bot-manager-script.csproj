@@ -5,10 +5,11 @@
     <RootNamespace>bot_manager_script</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	<Version>0.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BotManager.ScriptSupport" Version="0.0.1" />
+    <PackageReference Include="BotManager.ScriptSupport" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
