@@ -5,6 +5,7 @@
     <RootNamespace>bot_manager_script</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	<Version>0.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
