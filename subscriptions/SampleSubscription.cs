@@ -14,6 +14,10 @@ namespace bot_manager_script.subscriptions
     [Ignore]
     public class SampleSubscription : ISubscription<SubscriptionArguments>
     {
+        public string Id => "sample";
+
+        public string Name => "サンプルサブスクリプション";
+
         public IDisposable SubscribeFrom(SubscriptionArguments args)
         {
             CompositeDisposable disposables = new();

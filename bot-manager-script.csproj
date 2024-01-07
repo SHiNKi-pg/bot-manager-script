@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BotManager.ScriptSupport" Version="0.0.1" />
+    <PackageReference Include="BotManager.ScriptSupport" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
