@@ -9,11 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BotManager.Engine;
+using BotManager.Common.Messaging;
+using System.Reactive.Linq;
 
 namespace bot_manager_script.bots
 {
     [Bot]
-    public class TsumugiBot : IBot, IServiceBot<IDiscordServiceClient>, IServiceBot<ITwitterServiceClient>, IServiceBot<IMisskeyServiceClient>
+    public class TsumugiBot : IBot, IServiceBot<IDiscordServiceClient>, IServiceBot<ITwitterServiceClient>, IServiceBot<IMisskeyServiceClient>,
+        ISendableBot, IReceivableMessageBot<IReplyableMessage>
     {
         #region フィールド
         private readonly IDiscordServiceClient discordClient;
@@ -73,6 +76,18 @@ namespace bot_manager_script.bots
             discordClient.Dispose();
             twitterClient.Dispose();
             misskeyClient.Dispose();
+        }
+
+        public async Task Send(string content)
+        {
+            List<Task> taskList = new();
+            await Task.WhenAll(misskeyClient.Send(content), twitterClient.Send(content));
+        }
+
+        public IObservable<IReplyableMessage> CreateMessageNotifier()
+        {
+            IMessageReceived<IReplyableMessage> discord = discordClient;
+            return Observable.Amb(discord.MessageReceived, misskeyClient.MessageReceived);
         }
     }
 }
