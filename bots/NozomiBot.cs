@@ -86,8 +86,8 @@ namespace bot_manager_script.bots
 
         public IObservable<IReplyableMessage> CreateMessageNotifier()
         {
-            IMessageReceived<IReplyableMessage> discord = discordClient;
-            return Observable.Amb(discord.MessageReceived, misskeyClient.MessageReceived);
+            IObservable<IReplyableMessage> discord = discordClient.MessagingReceived;
+            return discord.Merge(misskeyClient.MessagingReceived);
         }
     }
 }
