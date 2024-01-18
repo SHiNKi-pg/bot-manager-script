@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using BotManager.Engine;
 using BotManager.Common.Messaging;
 using System.Reactive.Linq;
+using BotManager.Database;
 
 namespace bot_manager_script.bots
 {
@@ -60,6 +61,19 @@ namespace bot_manager_script.bots
         #endregion
         public async Task StartAsync()
         {
+            using (var db = BotDatabase.Connect())
+            {
+                // Botがデータベースに登録されていなければ登録する
+                if (!db.Bots.Any(b => b.Id == Id))
+                {
+                    await db.Bots.AddAsync(new()
+                    {
+                        Id = Id,
+                        Name = Name,
+                    });
+                    await db.SaveChangesAsync();
+                }
+            }
             // Botの起動
             await Task.WhenAll(discordClient.StartAsync(), twitterClient.StartAsync(), misskeyClient.StartAsync());
         }
