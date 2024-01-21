@@ -31,6 +31,9 @@ namespace bot_manager_script.subscriptions.nozomi
             {
                 var distributor = nozomi.CreateMessageNotifier().ToAsyncDistributor();
 
+                distributor.Add(new commands.nozomi.NozomiMorning());
+                distributor.Add(new commands.common.Dice());
+
                 subscriptions.Add(distributor);
             }
         }

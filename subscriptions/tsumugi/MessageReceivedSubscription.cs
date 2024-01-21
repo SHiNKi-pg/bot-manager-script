@@ -30,6 +30,8 @@ namespace bot_manager_script.subscriptions.tsumugi
             if(args.BotManager.TryGetBot<IReceivableMessageBot<IReplyableMessage>>("tsumugi", out var tsumugi, _ => true))
             {
                 var distributor = tsumugi.CreateMessageNotifier().ToAsyncDistributor();
+                distributor.Add(new commands.tsumugi.TsumugiMorning());
+                distributor.Add(new commands.common.Dice());
 
                 subscriptions.Add(distributor);
             }

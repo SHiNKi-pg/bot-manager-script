@@ -31,6 +31,9 @@ namespace bot_manager_script.subscriptions.chika
             {
                 var distributor = chika.CreateMessageNotifier().ToAsyncDistributor();
 
+                distributor.Add(new commands.chika.ChikaMorning());
+                distributor.Add(new commands.common.Dice());
+
                 subscriptions.Add(distributor);
             }
         }
