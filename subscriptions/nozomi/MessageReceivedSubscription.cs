@@ -1,4 +1,5 @@
-﻿using BotManager.Common;
+﻿using bot_manager_script.commands.nozomi;
+using BotManager.Common;
 using BotManager.Common.Extensions;
 using BotManager.Common.Messaging;
 using BotManager.Common.Scripting;
@@ -33,6 +34,7 @@ namespace bot_manager_script.subscriptions.nozomi
 
                 distributor.Add(new commands.nozomi.NozomiMorning());
                 distributor.Add(new commands.common.Dice());
+                distributor.Add(new Nozomwin());
 
                 subscriptions.Add(distributor);
             }
